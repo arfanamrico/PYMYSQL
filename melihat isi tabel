@@ -1,0 +1,10 @@
+import pymysql
+
+conn = pymysql.connect(host='localhost',user='root',passwd='',db='npm')
+mycursor = conn.cursor()
+
+mycursor.execute("select * from names;") #melihat isi semua colom pada tabel
+print(mycursor.fetchall())
+=========================
+mycursor.execute("select name, nilai from names;") #melihat isi colom name dan nilai pada table
+print(mycursor.fetchall())
