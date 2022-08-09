@@ -1,0 +1,7 @@
+import pymysql
+
+conn = pymysql.connect(host='localhost',user='root',passwd='',db='npm')
+mycursor = conn.cursor()
+
+mycursor.execute("insert into names(id,name,nilai) values(04,'Ashim',95);")
+print('data inserted!!!')
