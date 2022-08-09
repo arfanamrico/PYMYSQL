@@ -1,0 +1,8 @@
+import pymysql
+
+conn = pymysql.connect(host='localhost',user='root',passwd='',db='npm')
+mycursor = conn.cursor()
+
+mycursor.execute("update names set name='Arfan Amrico' where name='Arfan';") #merubah nama arfan menjadi arfan amrico
+conn.commit()
+print("table names updated!!!")
