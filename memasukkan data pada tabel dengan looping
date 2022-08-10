@@ -1,0 +1,12 @@
+import pymysql
+
+conn = pymysql.connect(host='localhost',user='root',passwd='',db='npm')
+mycursor = conn.cursor()
+
+data = [[5,'dila',89],[6,'dian',88.50],[7,'vikra',87.50]]
+for i in data:
+    sql = "INSERT INTO names (id,name,nilai) VALUES(%s,%s,%s)"
+    nilai = (i[0],i[1],i[2])
+    mycursor.execute(sql,nilai)
+    conn.commit()
+print('data inserted!!!')
