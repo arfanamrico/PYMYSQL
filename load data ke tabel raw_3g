@@ -1,0 +1,25 @@
+import datetime
+import pymysql
+
+conn = pymysql.connect(host='localhost',user='root',passwd='',db='npm')
+mycursor = conn.cursor()
+path = r"E:\Meas\IOH_3G 20220820.csv"
+tmp=[]
+
+lines = open(path).read().splitlines()
+items = [line.split(',') for line in lines]
+for val in range (1, len(items)):
+    jam, menit, detik = items[val][1].split(':')
+    bulan, tanggal, tahun = items[val][0].split('/')
+    date = datetime.date(int(tahun), int(bulan), int(tanggal))
+    time = datetime.time(int(jam),int(menit),int(detik))    
+    tmp.append([date,time,items[val][2],items[val][3],	items[val][4],	items[val][5],	items[val][6],	items[val][7],	items[val][8],	items[val][9],	items[val][10],	items[val][11],	items[val][12],	items[val][13],	items[val][14],	items[val][15],	items[val][16],	items[val][17],	items[val][18],	items[val][19],	items[val][20],	items[val][21],	items[val][22],	items[val][23],	items[val][24],	items[val][25],	items[val][26],	items[val][27],	items[val][28],	items[val][29],	items[val][30],	items[val][31],	items[val][32],	items[val][33],	items[val][34],	items[val][35],	items[val][36],	items[val][37],	items[val][38],	items[val][39],	items[val][40],	items[val][41],	items[val][42],	items[val][43],	items[val][44],	items[val][45],	items[val][46],	items[val][47],	items[val][48],	items[val][49],	items[val][50],	items[val][51],	items[val][52],	items[val][53],	items[val][54],	items[val][55],	items[val][56],	items[val][57],	items[val][58],	items[val][59],	items[val][60],	items[val][61],	items[val][62],	items[val][63],	items[val][64],	items[val][65],	items[val][66],	items[val][67],	items[val][68],	items[val][69],	items[val][70],	items[val][71],	items[val][72],	items[val][73],	items[val][74],	items[val][75],	items[val][76],	items[val][77]])
+
+mycursor.executemany("""INSERT INTO ioh_raw_3g 
+(`DATE`,	`TIME`,	`Site ID`,	`Branch`,	`Kabupaten`,	`Vendor`,	`RNC name`,	`WBTS name`,	`WBTS ID`,	`CellName`,	`WCEL ID`,	`MC_H3I_Cell_Availability`,	`MC_H3I_Cell_Availability_Num`,	`MC_H3I_Cell_Availability_Denum`,	`MC_H3I_Cell_Availability_Auto`,	`MC_H3I_Cell_Availability_AutoN`,	`MC_H3I_Cell_Availability_AutoD`,	`MC_H3I_CSSR_CS`,	`MC_H3I_CSSR_CS_RAB_Num`,	`MC_H3I_CSSR_CS_RAB_Denum`,	`MC_H3I_CSSR_CS_RRC_Num`,	`MC_H3I_CSSR_CS_RRC_Denum`,	`MC_H3I_CSSR_PS`,	`MC_H3I_CSSR_PS_RAB_Num`,	`MC_H3I_CSSR_PS_RAB_Denum`,	`MC_H3I_CSSR_PS_RRC_Num`,	`MC_H3I_CSSR_PS_RRC_Denum`,	`MC_H3I_CSSR_PS_HSDPA_Num`,	`MC_H3I_CSSR_PS_HSDPA_Denum`,	`MC_H3I_Call_Blocking_Rate_CS`,	`MC_H3I_Call_Blocking_Rate_CS_N`,	`MC_H3I_Call_Blocking_Rate_CS_D`,	`MC_H3I_Call_Blocking_Rate_PS`,	`MC_H3I_Call_Blocking_Rate_PS_N`,	`MC_H3I_Call_Blocking_Rate_PS_D`,	`MC_H3I_Paging_Success_Rate`,	`MC_H3I_Paging_SR_Num`,	`MC_H3I_Paging_SR_Denum`,	`MC_H3I_DCR_CS`,	`MC_H3I_DCR_CS_Num`,	`MC_H3I_DCR_CS_Denum`,	`MC_H3I_DCR_PS`,	`MC_H3I_DCR_PS_R99_Num`,	`MC_H3I_DCR_PS_R99_Denum`,	`MC_H3I_DCR_PS_HS_Num`,	`MC_H3I_DCR_PS_HS_Denum`,	`MC_H3I_SHOSR_CS_PS`,	`MC_H3I_SHOSR_CS_PS_Num`,	`MC_H3I_SHOSR_CS_PS_Denum`,	`MC_H3I_Inter_RNC_HOSR_CS`,	`MC_H3I_Inter_RNC_HOSR_CS_Num`,	`MC_H3I_Inter_RNC_HOSR_CS_Denum`,	`MC_H3I_Inter_RNC_HOSR_PS`,	`MC_H3I_Inter_RNC_HOSR_PS_Num`,	`MC_H3I_Inter_RNC_HOSR_PS_Denum`,	`MC_H3I_Traffic_Data`,	`MC_ISAT_Traffic_CS`,	`MC_ISAT_HS_User`,	`MC_ISAT_HS_User_Num`,	`MC_ISAT_HS_User_Denum`,	`MC_ISAT_CQI`,	`MC_ISAT_CQI_Num`,	`MC_ISAT_CQI_Denum`,	`MC_H3I_SHO_CSPS`,	`MC_H3I_SHO_CSPS_Num`,	`MC_H3I_SHO_CSPS_Denum`,	`MC_H3I_Average_RTWP`,	`MC_H3I_DL_User_Throughput`,	`MC_H3I_DL_User_Throughput_Num`,	`MC_H3I_DL_User_Throughput_Dnum`,	`MC_ISAT_UL_User_Throughput`,	`MC_H3I_DL_Cell_Throughput`,	`MC_H3I_DL_Cell_Throughput_Num`,	`MC_H3I_DL_Cell_Throughput_Dnum`,	`MC_H3I_UL_Cell_Throughput`,	`MC_H3I_UL_Cell_Throughput_Num`,	`MC_H3I_UL_Cell_Throughput_Dnum`,	`MC_H3I_IuB_Rejection`) 
+VALUES(%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s,	%s)""",
+tmp)
+
+conn.commit()
+conn.close()
+print("data inserted!!!")
