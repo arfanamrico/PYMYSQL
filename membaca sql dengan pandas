@@ -1,0 +1,12 @@
+import pymysql
+import pandas as pd
+
+con = pymysql.connect(db='npm', user='root', passwd='', host='localhost', port=3306)
+cur = con.cursor()
+
+query = 'select * from ioh_raw_4g where date = "2022-11-07"'
+df = pd.read_sql(query,con)
+#cur.executemany("INSERT INTO test2g (DATE,TIME,SiteID,Branch,Kabupaten,Vendor,BSCname,BCFname,CellName,DN) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",tmp)
+#con.commit()
+#con.close()
+print(df)
