@@ -1,0 +1,35 @@
+import mysql.connector
+import pandas as pd
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  password="",
+  database="tsel_jabo"
+)
+mycursor = mydb.cursor()
+# mycursor.execute("""CREATE TABLE GSM_Cell_Report
+# (`Date` VARCHAR (20) NOT NULL,
+# `Site ID` VARCHAR (10) NOT NULL,
+# `NE Name` VARCHAR (100) NOT NULL,
+# `Site Index` INT(10) UNSIGNED NOT NULL,
+# `Site Name` VARCHAR (20) NOT NULL,
+# `NE` VARCHAR (20) NOT NULL,
+# `Cell Index` INT(10) UNSIGNED NOT NULL,
+# `Cell Name` VARCHAR (50) NOT NULL,
+# `Activity Status` VARCHAR (20) NOT NULL,
+# `CI` INT(10) UNSIGNED NOT NULL,
+# `BASEI` INT(10) UNSIGNED NOT NULL,
+# `NI` INT(10) UNSIGNED NOT NULL,
+# `BCCHNO` INT(10) UNSIGNED NOT NULL,
+# `FreqSeg` VARCHAR (20) NOT NULL,
+# `BLK Status` VARCHAR (20) NOT NULL,
+# `Hop HSN` INT(10) UNSIGNED NOT NULL,
+# `Hop TSC` INT(10) UNSIGNED NOT NULL,
+# `Hop Index` INT(10) UNSIGNED NOT NULL,
+# `LAC` INT(10) UNSIGNED NOT NULL,
+# `IP` INT(10) UNSIGNED NOT NULL)""")
+mycursor.execute("""
+ALTER TABLE GSM_Cell_Report
+	ADD PRIMARY KEY (`DATE`, `NE Name`, `Cell Name`) USING BTREE
+""")
